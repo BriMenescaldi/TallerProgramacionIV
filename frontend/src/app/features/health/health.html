@@ -1,0 +1,22 @@
+<section class="health">
+  <h2>Estado del backend</h2>
+
+  @if (loading()) {
+    <p class="muted">Consultando…</p>
+  } @else if (error()) {
+    <p class="badge badge--down">DOWN</p>
+    <p class="muted">{{ error() }}</p>
+    <p class="muted">¿Está corriendo el backend en :8080? (<code>./gradlew bootRun</code>)</p>
+  } @else if (status()) {
+    <p class="badge badge--up">{{ status()!.status }}</p>
+    <p class="muted">timestamp: {{ status()!.timestamp }}</p>
+  }
+
+  <button type="button" (click)="check()" [disabled]="loading()">Volver a comprobar</button>
+
+  <p class="hint">
+    Este valor viaja: <code>HealthStatus.java</code> → OpenAPI → orval →
+    <code>HealthService</code> tipado. Cambiá el DTO en el backend y corré
+    <code>npm run gen:api</code> para propagarlo.
+  </p>
+</section>
