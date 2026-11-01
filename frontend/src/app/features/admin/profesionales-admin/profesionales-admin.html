@@ -1,0 +1,55 @@
+<mat-card appearance="outlined" class="modulo">
+  <div class="cabecera">
+    <div>
+      <h1>Profesionales</h1>
+      <p>Alta, edición y baja de profesionales.</p>
+    </div>
+    <button mat-flat-button (click)="nuevo()">
+      <mat-icon>add</mat-icon>
+      Nuevo profesional
+    </button>
+  </div>
+
+  @if (mostrarForm()) {
+    <form [formGroup]="form" (ngSubmit)="guardar()" class="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+      @if (creando()) {
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+      }
+      <mat-form-field appearance="outline">
+        <mat-label>Especialidad</mat-label>
+        <input matInput formControlName="especialidad" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Bio</mat-label>
+        <textarea matInput formControlName="bio" rows="2"></textarea>
+      </mat-form-field>
+      <div class="acciones-form">
+        <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+        <button mat-flat-button type="submit" [disabled]="cargando()">Guardar</button>
+      </div>
+    </form>
+  }
+
+  <app-data-table
+    [columns]="columnas"
+    [data]="items()"
+    emptyMessage="No hay profesionales cargados."
+    (editar)="editar($event)"
+    (eliminar)="eliminar($event)"
+  />
+</mat-card>
