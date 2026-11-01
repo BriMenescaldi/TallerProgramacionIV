@@ -1,0 +1,45 @@
+<mat-card appearance="outlined" class="modulo">
+  <div class="cabecera">
+    <div>
+      <h1>Servicios</h1>
+      <p>Alta, edición y baja de servicios del sistema.</p>
+    </div>
+    <button mat-flat-button (click)="nuevo()">
+      <mat-icon>add</mat-icon>
+      Nuevo servicio
+    </button>
+  </div>
+
+  @if (mostrarForm()) {
+    <form [formGroup]="form" (ngSubmit)="guardar()" class="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion" rows="2"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Duración (min)</mat-label>
+        <input matInput type="number" formControlName="duracionMin" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Precio</mat-label>
+        <input matInput type="number" formControlName="precio" />
+      </mat-form-field>
+      <div class="acciones-form">
+        <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+        <button mat-flat-button type="submit" [disabled]="cargando()">Guardar</button>
+      </div>
+    </form>
+  }
+
+  <app-data-table
+    [columns]="columnas"
+    [data]="items()"
+    emptyMessage="No hay servicios cargados."
+    (editar)="editar($event)"
+    (eliminar)="eliminar($event)"
+  />
+</mat-card>
