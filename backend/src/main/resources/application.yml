@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: sistema-turnos
+
+  datasource:
+    url: jdbc:h2:file:./data/sistematurnos;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: ${APP_JWT_SECRET:cambiar-este-secret-de-desarrollo-por-uno-largo-y-seguro-1234567890}
+    expiration-ms: 86400000 # 24 h
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
