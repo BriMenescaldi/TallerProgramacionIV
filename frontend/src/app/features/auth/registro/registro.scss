@@ -1,0 +1,36 @@
+.registro-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.registro-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+mat-card-content {
+  margin-top: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.submit {
+  margin-top: 0.5rem;
+}
+
+.alt {
+  margin: 1rem 0 0;
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+}
