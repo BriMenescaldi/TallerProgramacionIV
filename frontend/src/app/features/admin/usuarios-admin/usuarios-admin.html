@@ -1,0 +1,44 @@
+<mat-card appearance="outlined" class="modulo">
+  <div class="cabecera">
+    <div>
+      <h1>Usuarios</h1>
+      <p>
+        Edición y baja lógica de usuarios. El alta es por registro o por el ABM de profesionales.
+      </p>
+    </div>
+  </div>
+
+  @if (mostrarForm()) {
+    <form [formGroup]="form" (ngSubmit)="guardar()" class="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol">
+          @for (rol of roles; track rol) {
+            <mat-option [value]="rol">{{ rol }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox formControlName="activo">Activo</mat-checkbox>
+      <div class="acciones-form">
+        <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+        <button mat-flat-button type="submit" [disabled]="cargando()">Guardar</button>
+      </div>
+    </form>
+  }
+
+  <app-data-table
+    [columns]="columnas"
+    [data]="items()"
+    emptyMessage="No hay usuarios cargados."
+    (editar)="editar($event)"
+    (eliminar)="eliminar($event)"
+  />
+</mat-card>
