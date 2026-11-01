@@ -1,0 +1,45 @@
+<div class="modulo">
+  <h1>Mis turnos</h1>
+
+  <table mat-table [dataSource]="items()" class="tabla">
+    <ng-container matColumnDef="fechaHora">
+      <th mat-header-cell *matHeaderCellDef>Fecha y hora</th>
+      <td mat-cell *matCellDef="let t">{{ t.fechaHora | date: 'EEEE d/M/yy HH:mm' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="servicio">
+      <th mat-header-cell *matHeaderCellDef>Servicio</th>
+      <td mat-cell *matCellDef="let t">{{ t.servicio?.nombre }}</td>
+    </ng-container>
+    <ng-container matColumnDef="contraparte">
+      <th mat-header-cell *matHeaderCellDef>{{ esProfesional ? 'Cliente' : 'Profesional' }}</th>
+      <td mat-cell *matCellDef="let t">{{ contraparte(t) }}</td>
+    </ng-container>
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let t">{{ estado(t) }}</td>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef class="acciones-col">Acciones</th>
+      <td mat-cell *matCellDef="let t" class="acciones-col">
+        @if (puedeConfirmar(t)) {
+          <button mat-button color="primary" (click)="cambiar(t, 'CONFIRMADO')">Confirmar</button>
+        }
+        @if (puedeCompletar(t)) {
+          <button mat-button color="primary" (click)="cambiar(t, 'COMPLETADO')">Completar</button>
+        }
+        @if (puedeNoAsistio(t)) {
+          <button mat-button (click)="cambiar(t, 'NO_ASISTIO')">No asistió</button>
+        }
+        @if (puedeCancelar(t)) {
+          <button mat-button color="warn" (click)="cancelar(t)">Cancelar</button>
+        }
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+  </table>
+
+  @if (!items().length) {
+    <p class="vacio">No tenés turnos.</p>
+  }
+</div>

@@ -1,0 +1,19 @@
+.modulo {
+  display: block;
+  max-width: 900px;
+}
+
+.tabla {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.acciones-col {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.vacio {
+  color: var(--mat-sys-on-surface-variant);
+  margin-top: 1rem;
+}
