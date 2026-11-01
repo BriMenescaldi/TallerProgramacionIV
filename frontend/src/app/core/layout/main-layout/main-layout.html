@@ -1,0 +1,34 @@
+<mat-sidenav-container class="layout">
+  <mat-sidenav mode="side" opened class="sidebar">
+    <div class="brand">Sistema de Turnos</div>
+    <mat-nav-list>
+      @for (item of navItems(); track item.ruta) {
+        <a
+          mat-list-item
+          [routerLink]="item.ruta"
+          routerLinkActive="activo"
+          [routerLinkActiveOptions]="{ exact: item.exacto ?? false }"
+        >
+          <mat-icon matListItemIcon>{{ item.icono }}</mat-icon>
+          <span matListItemTitle>{{ item.etiqueta }}</span>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="topbar">
+      <span class="spacer"></span>
+      @if (usuario(); as u) {
+        <span class="usuario">{{ u.nombre }}</span>
+      }
+      <button mat-icon-button (click)="logout()" aria-label="Cerrar sesión">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <main class="contenido">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

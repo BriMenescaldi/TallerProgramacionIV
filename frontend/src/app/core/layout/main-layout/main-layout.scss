@@ -1,0 +1,37 @@
+.layout {
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+}
+
+.brand {
+  padding: 1.25rem 1.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--mat-sys-primary);
+}
+
+.activo {
+  background: var(--mat-sys-secondary-container);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.usuario {
+  margin-right: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.contenido {
+  padding: 1.5rem;
+}
