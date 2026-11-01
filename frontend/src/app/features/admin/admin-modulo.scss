@@ -1,0 +1,39 @@
+.modulo {
+  display: block;
+  padding: 1.5rem;
+}
+
+.cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cabecera p {
+  color: var(--mat-sys-on-surface-variant);
+  margin: 0.25rem 0 0;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form .full {
+  grid-column: 1 / -1;
+}
+
+.acciones-form {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
