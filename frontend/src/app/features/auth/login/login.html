@@ -1,0 +1,33 @@
+<div class="login-page">
+  <mat-card appearance="outlined" class="login-card">
+    <mat-card-header>
+      <mat-card-title>Sistema de Turnos</mat-card-title>
+      <mat-card-subtitle>Iniciá sesión para continuar</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="ingresar()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" autocomplete="username" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            autocomplete="current-password"
+          />
+        </mat-form-field>
+
+        <button mat-flat-button type="submit" [disabled]="cargando()" class="submit">
+          Ingresar
+        </button>
+      </form>
+
+      <p class="alt">¿No tenés cuenta? <a routerLink="/registro">Creá una</a></p>
+    </mat-card-content>
+  </mat-card>
+</div>
