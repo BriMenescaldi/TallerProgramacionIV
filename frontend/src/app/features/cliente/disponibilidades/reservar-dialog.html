@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Reservar turno</h2>
+<mat-dialog-content>
+  <p class="franja">
+    {{ dia(data.diaSemana) }} · {{ hora(data.horaInicio) }}–{{ hora(data.horaFin) }} ·
+    {{ data.profesional?.usuario?.nombre }}
+  </p>
+  <form [formGroup]="form" class="form">
+    <mat-form-field>
+      <mat-label>Servicio</mat-label>
+      <mat-select formControlName="servicioId">
+        @for (s of servicios(); track s.id) {
+          <mat-option [value]="s.id">{{ s.nombre }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha</mat-label>
+      <input
+        matInput
+        readonly
+        [matDatepicker]="picker"
+        [matDatepickerFilter]="filtroDia"
+        [min]="min"
+        [max]="max"
+        formControlName="fecha"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="picker" />
+      <mat-datepicker #picker />
+    </mat-form-field>
+    <p class="hora-info">
+      El turno quedará a las {{ hora(data.horaInicio) }} (inicio de la franja).
+    </p>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-flat-button color="primary" [disabled]="form.invalid" (click)="confirmar()">
+    Confirmar reserva
+  </button>
+</mat-dialog-actions>
