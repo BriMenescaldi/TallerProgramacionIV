@@ -1,0 +1,57 @@
+<div class="modulo">
+  <h1>Mis disponibilidades</h1>
+
+  <mat-card appearance="outlined">
+    <mat-card-header><mat-card-title>Agregar franja semanal</mat-card-title></mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="crear()" class="form">
+        <mat-form-field>
+          <mat-label>Día</mat-label>
+          <mat-select formControlName="diaSemana">
+            @for (d of dias; track d) {
+              <mat-option [value]="d">{{ dia(d) }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Desde</mat-label>
+          <input matInput type="time" formControlName="horaInicio" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Hasta</mat-label>
+          <input matInput type="time" formControlName="horaFin" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="guardando()">Agregar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <table mat-table [dataSource]="items()" class="tabla">
+    <ng-container matColumnDef="diaSemana">
+      <th mat-header-cell *matHeaderCellDef>Día</th>
+      <td mat-cell *matCellDef="let d">{{ dia(d.diaSemana) }}</td>
+    </ng-container>
+    <ng-container matColumnDef="horaInicio">
+      <th mat-header-cell *matHeaderCellDef>Desde</th>
+      <td mat-cell *matCellDef="let d">{{ hora(d.horaInicio) }}</td>
+    </ng-container>
+    <ng-container matColumnDef="horaFin">
+      <th mat-header-cell *matHeaderCellDef>Hasta</th>
+      <td mat-cell *matCellDef="let d">{{ hora(d.horaFin) }}</td>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef class="acciones-col">Acciones</th>
+      <td mat-cell *matCellDef="let d" class="acciones-col">
+        <button mat-icon-button color="warn" aria-label="Borrar" (click)="borrar(d)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+  </table>
+
+  @if (!items().length) {
+    <p class="vacio">Todavía no cargaste franjas de disponibilidad.</p>
+  }
+</div>

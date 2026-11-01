@@ -1,0 +1,33 @@
+.modulo {
+  display: block;
+  max-width: 720px;
+}
+
+mat-card {
+  margin: 1rem 0 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.form mat-form-field {
+  flex: 1 1 140px;
+}
+
+.tabla {
+  width: 100%;
+}
+
+.acciones-col {
+  width: 72px;
+  text-align: right;
+}
+
+.vacio {
+  color: var(--mat-sys-on-surface-variant);
+  margin-top: 1rem;
+}
